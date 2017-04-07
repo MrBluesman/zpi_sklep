@@ -7,8 +7,8 @@
     <table class="table table-bordered">
         @foreach($artists as $artist)
         <tr>
-            <td><a href="{{route('artists.details', $artist)}}">{{$artist->nazwa}}</a></td>
-            <td>{{$artist->opis}}</td>
+            <th><a href="{{route('artists.details', $artist)}}">{{$artist->nazwa}}</a></th>
+            <th>{{$artist->opis}}</th>
         </tr>
         @endforeach
     </table>

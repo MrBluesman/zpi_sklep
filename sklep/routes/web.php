@@ -56,6 +56,11 @@ Route::get('/artists/{artist}',[
     'as' => 'artists.details'
 ]);
 
+Route::get('/albums', [
+  'uses' => 'AlbumsController@index',
+  'as' => 'albums.index'
+]);
+
 
 Auth::routes();
 

@@ -5,7 +5,6 @@ namespace App;
 use App\Album;
 use Illuminate\Database\Eloquent\Model;
 
-
 class Artist extends Model
 {
     protected $fillable = ['nazwa','opis'];

@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     'table' => 'osoba',
@@ -72,8 +71,9 @@ return [
         // ],
 
         'users' => [
-            'driver' => 'database',
-            'table' => 'osoba',
+            'driver' => 'eloquent',
+            'model' => App\User::class,
+            //'table' => 'Osoba',
         ],
     ],
 

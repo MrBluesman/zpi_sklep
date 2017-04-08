@@ -14,6 +14,6 @@ class Album extends Model
 
   public function artist()
   {
-    return $this->belongsTo('App\Artist', 'plyta_id', 'artysta_id');
+    return $this->belongsTo('App\Artist', 'artystaId');
   }
 }

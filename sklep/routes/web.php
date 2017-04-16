@@ -34,6 +34,7 @@ Route::get('/', function ()
 //
 //});
 
+//ARTYŚCI
 
 Route::get('/artists',[
     'uses' => 'ArtistsController@index',
@@ -56,9 +57,35 @@ Route::get('/artists/{artist}',[
     'as' => 'artists.details'
 ]);
 
+
+//ALBUMY
+
 Route::get('/albums', [
   'uses' => 'AlbumsController@index',
   'as' => 'albums.index'
+]);
+
+
+//KOD RABATOWY
+Route::get('/discountCodes',[
+    'uses' => 'DiscountCodesController@index',
+    'as' => 'discountCodes.index'
+]);
+
+Route::get('/discountCodes/add',[
+    'uses' => 'DiscountCodesController@addCode',
+    'as' => 'discountCodes.addCode'
+]);
+
+
+Route::post('/discountCodes/save',[
+    'uses' => 'DiscountCodesController@saveCode',
+    'as' => 'discountCodes.saveCode'
+]);
+
+Route::get('/discountCodes/delete/{code}',[
+    'uses' => 'DiscountCodesController@deleteCode',
+    'as' => 'discountCodes.deleteCode'
 ]);
 
 

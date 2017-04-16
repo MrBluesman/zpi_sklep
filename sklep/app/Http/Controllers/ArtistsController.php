@@ -33,7 +33,6 @@ class ArtistsController extends Controller
     public function saveArtist(Request $request)
     {
         Artist::create($request->all());
-        //dd($request->all());
         //metoda 2
 //        $artist = new Artist();
 //        $artist->nazwa = $request->input('nazwa');

@@ -88,6 +88,22 @@ Route::get('/discountCodes/delete/{code}',[
     'as' => 'discountCodes.deleteCode'
 ]);
 
+//ZARZĄDZANIE UŻYTKOWNIKAMI
+Route::get('/userManagementPanel',[
+    'uses' => 'UserManagementPanelController@index',
+    'as' => 'userManagementPanel.index'
+]);
+
+Route::get('/userManagementPanel/block/{userID}',[
+    'uses' => 'UserManagementPanelController@blockUser',
+    'as' => 'userManagementPanel.blockUser'
+]);
+
+Route::get('/userManagementPanel/unblock/{userID}',[
+    'uses' => 'UserManagementPanelController@unblockUser',
+    'as' => 'userManagementPanel.unblockUser'
+]);
+
 
 Auth::routes();
 

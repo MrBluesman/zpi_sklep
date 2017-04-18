@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'adresId', 'typ_kontaId', 'imie', 'nazwisko', 'pesel', 'email', 'nr_telefonu', 'name', 'password'
+        'adresId', 'typ_kontaId', 'imie', 'nazwisko', 'pesel', 'email', 'nr_telefonu', 'name', 'password', 'zbanowany'
     ];
 
     /**
@@ -31,8 +31,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function address()
+    public function typKonta()
     {
-      return this->hasOne('App\ShippingAddress', 'adres_id', 'adresId');
+      return $this->belongsTo('App\AccountType', 'typ_kontaId');
     }
+
+    // public function address()
+    // {
+    //   return $this->hasOne('App\ShippingAddress', 'adres_id', 'adresId');
+    // }
 }

@@ -16,6 +16,8 @@
         <tr><td>{{$album->artist['nazwa']}}</td></tr>
         <tr><td>MP3: {{$album->cena_cyfrowa}} PLN</td></tr>
         <tr><td>CD: {{$album->cena_fizyczna}} PLN</td></tr>
+        <tr><div><a href="{{ route('albums.edit' , $album) }}" type="button" class="btn btn-default">Edycja</a></div></tr>
+        <tr><div><a href="{{ route('albums.delete' , $album) }}" type="button" class="btn btn-default">Usuń</a></div></tr>
     </table>
         </td>
     @if(($loop->index) % 2 == 1)
@@ -24,6 +26,6 @@
   @endforeach
 </table>
 <div><a href="{{ url('/') }}" type="button" class="btn btn-default">Wróć</a></div>
-
+<div><a href="{{ url('/albums/add') }}" type="button" class="btn btn-default">Dodaj album</a></div>
 
 @endsection

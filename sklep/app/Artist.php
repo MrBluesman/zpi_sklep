@@ -16,4 +16,6 @@ class Artist extends Model
     {
         return $this->hasMany('App\Album', 'plyta_id', 'artysta_id');
     }
+
+
 }

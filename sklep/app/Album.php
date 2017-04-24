@@ -12,8 +12,14 @@ class Album extends Model
   protected $primaryKey = 'plyta_id';
   public $timestamps = false;
 
-  public function artist()
-  {
-    return $this->belongsTo('App\Artist', 'artystaId');
-  }
+    public function artist()
+    {
+        return $this->belongsTo('App\Artist', 'artystaId' );
+    }
+
+    public function type()
+    {
+        return $this->hasOne('App\Type', 'gatunek_Id' , 'gatunekId');
+    }
+
 }

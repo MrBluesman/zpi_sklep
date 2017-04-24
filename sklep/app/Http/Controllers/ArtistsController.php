@@ -47,4 +47,7 @@ class ArtistsController extends Controller
         //dd($artist->all());
         return view('artists.details', compact('artist'));
     }
+
+
+
 }

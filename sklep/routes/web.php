@@ -65,6 +65,30 @@ Route::get('/albums', [
   'as' => 'albums.index'
 ]);
 
+Route::get('/albums/add', [
+    'uses' => 'AlbumsController@add',
+    'as' => 'albums.add'
+]);
+
+Route::post('/albums/save', [
+    'uses' => 'AlbumsController@save',
+    'as' => 'albums.save'
+]);
+
+Route::get('/albums/{album}', [
+    'uses' => 'AlbumsController@edit',
+    'as' => 'albums.edit'
+]);
+
+Route::post('/albums/edit/{album}', [
+    'uses' => 'AlbumsController@change',
+    'as' => 'albums.change'
+]);
+
+Route::get('/albums/delete/{album}', [
+    'uses' => 'AlbumsController@delete',
+    'as' => 'albums.delete'
+]);
 
 //KOD RABATOWY
 Route::get('/discountCodes',[

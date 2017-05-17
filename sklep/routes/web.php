@@ -90,6 +90,16 @@ Route::get('/albums/delete/{album}', [
     'as' => 'albums.delete'
 ]);
 
+Route::get('/addToCart/{album}', [
+    'uses' => 'AlbumsController@addToCart',
+    'as' => 'albums.addToCart'
+]);
+
+Route::get('/getCart', [
+    'uses' => 'AlbumsController@getCart',
+    'as' => 'albums.getCart'
+]);
+
 //KOD RABATOWY
 Route::get('/discountCodes',[
     'uses' => 'DiscountCodesController@index',

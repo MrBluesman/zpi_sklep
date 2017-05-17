@@ -18,6 +18,7 @@
         <tr><td>CD: {{$album->cena_fizyczna}} PLN</td></tr>
         <tr><div><a href="{{ route('albums.edit' , $album) }}" type="button" class="btn btn-default">Edycja</a></div></tr>
         <tr><div><a href="{{ route('albums.delete' , $album) }}" type="button" class="btn btn-default">Usuń</a></div></tr>
+        <tr><div><a href="{{ route('albums.addToCart' , $album) }}" type="button" class="btn btn-default" role="button">Dodaj do koszyka</a></div></tr>
     </table>
         </td>
     @if(($loop->index) % 2 == 1)

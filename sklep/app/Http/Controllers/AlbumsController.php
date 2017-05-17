@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Album;
 use App\Artist;
+use App\Cart;
 use App\Type;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Session;
 
 class AlbumsController extends Controller
 {
@@ -80,5 +82,31 @@ class AlbumsController extends Controller
         $album->delete();
         return \redirect()->route('albums.index');
 
+    }
+
+    public function addToCart(Request $request, Album $album)
+    {
+        //$album = Album::find($id);
+        //$oldCart = Session::has('Cart') ? Session::get('cart') : null;
+        $oldCart = Session::has('cart')?$request->session()->get('cart'):null;
+        $cart = new Cart($oldCart);
+        $cart->add($album, $album['plyta_id'], 1);
+
+        $request->session()->put('cart',$cart);
+        //dd($request->session()->get('cart'));
+        return redirect()->route('albums.index');
+
+    }
+
+    public function getCart()
+    {
+        if(!Session::has('cart'))
+        {
+            return view('albums.koszyk', ['albums'=> null]);
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        //dd(session()->get('cart'));
+        return view('albums.koszyk', ['albums'=> $cart->items, 'totalprice'=>$cart->totalPrice]);
     }
 }

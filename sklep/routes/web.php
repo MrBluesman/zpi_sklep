@@ -100,6 +100,21 @@ Route::get('/getCart', [
     'as' => 'cart.getCart'
 ]);
 
+Route::get('/getCart/increment/{album}', [
+    'uses' => 'CartController@incrementQuantity',
+    'as' => 'cart.incrementQuantity'
+]);
+
+Route::get('/getCart/decrement/{album}', [
+    'uses' => 'CartController@decrementQuantity',
+    'as' => 'cart.decrementQuantity'
+]);
+
+Route::get('/getCart/remove/{album}', [
+    'uses' => 'CartController@removeItem',
+    'as' => 'cart.removeItem'
+]);
+
 //KOD RABATOWY
 Route::get('/discountCodes',[
     'uses' => 'DiscountCodesController@index',

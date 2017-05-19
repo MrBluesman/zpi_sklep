@@ -39,6 +39,42 @@ class Cart
         $this->items[$id] = $storedItem;
         $this->totalQty++;
         $this->totalPrice += $item->cena_fizyczna;
+        $this->totalPrice = number_format($this->totalPrice,2);
     }
+
+    public function delete($item, $id){
+        if($this->items) {
+            if(array_key_exists($id, $this->items)) {
+                $storedItem = $this->items[$id];
+            }
+        }
+
+        $storedItem['qty']--;
+        $storedItem['price'] = $item->cena_fizyczna * $storedItem['qty'];
+        $this->items[$id] = $storedItem;
+        $this->totalQty--;
+        $this->totalPrice -= $item->cena_fizyczna;
+        $this->totalPrice = number_format($this->totalPrice,2);
+        if($storedItem['qty'] == 0) {
+          unset($this->items[$id]);
+        }
+    }
+
+    public function deleteAll($item, $id){
+        if($this->items) {
+            if(array_key_exists($id, $this->items)) {
+              $this->totalQty -= $this->items[$id]['qty'];
+              $this->totalPrice -= $item->cena_fizyczna * $this->items[$id]['qty'];
+              $this->totalPrice = number_format($this->totalPrice,2);
+              unset($this->items[$id]);
+            }
+        }
+    }
+
+    public function hasItems() {
+      return $this->totalQty != 0;
+    }
+
+
 
 }

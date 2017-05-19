@@ -53,7 +53,7 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li><a href="{{ route('albums.getCart') }}"><i class="fa fa-shopping-cart " aria-hidden="true"></i>Koszyk
+                            <li><a href="{{ route('cart.getCart') }}"><i class="fa fa-shopping-cart " aria-hidden="true"></i>Koszyk
                                     <span class="badge"> {{ Session::has('cart') ? Session::get('cart')->totalQty : ''}} </span></a>
 
                             </li>

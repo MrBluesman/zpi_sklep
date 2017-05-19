@@ -91,13 +91,13 @@ Route::get('/albums/delete/{album}', [
 ]);
 
 Route::get('/addToCart/{album}', [
-    'uses' => 'AlbumsController@addToCart',
-    'as' => 'albums.addToCart'
+    'uses' => 'CartController@addToCart',
+    'as' => 'cart.addToCart'
 ]);
 
 Route::get('/getCart', [
-    'uses' => 'AlbumsController@getCart',
-    'as' => 'albums.getCart'
+    'uses' => 'CartController@getCart',
+    'as' => 'cart.getCart'
 ]);
 
 //KOD RABATOWY

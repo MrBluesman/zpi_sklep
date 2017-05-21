@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Album;
+use App\DiscountCode;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -23,7 +24,6 @@ class CartController extends Controller
       $request->session()->put('cart',$cart);
       //dd($request->session()->get('cart'));
       return redirect()->route('albums.index');
-
   }
 
 
@@ -36,8 +36,9 @@ class CartController extends Controller
       $oldCart = Session::get('cart');
       $cart = new Cart($oldCart);
       //dd(session()->get('cart'));
-      return view('albums.koszyk', ['cartItems'=> $cart->items, 'totalprice'=>$cart->totalPrice]);
+      return view('albums.koszyk', ['cartItems'=> $cart->items, 'totalprice'=>$cart->totalPrice, 'code'=>$cart->discountCode]);
   }
+
 
   public function incrementQuantity(Request $request, Album $album)
   {
@@ -60,7 +61,6 @@ class CartController extends Controller
     } else {
       $request->session()->forget('cart');
     }
-    //dd($request->session()->get('cart'));
     return \redirect()->route('cart.getCart');
   }
 
@@ -74,7 +74,22 @@ class CartController extends Controller
     } else {
       $request->session()->forget('cart');
     }
-    //dd($request->session()->get('cart'));
+    return \redirect()->route('cart.getCart');
+  }
+
+  public function addDiscountCode(Request $request) {
+    $oldCart = Session::has('cart')?$request->session()->get('cart'):null;
+    $cart = new Cart($oldCart);
+
+    $codeName = $request->input('discountCode');
+    $code = DiscountCode::where('tresc', $codeName)->first();
+    if(!empty($code)) {
+      $znizka = $code->znizka;
+      $cart->addDiscount($znizka);
+      $request->session()->put('cart',$cart);
+    }
+
+    //dd(session()->get('cart'));
     return \redirect()->route('cart.getCart');
   }
 

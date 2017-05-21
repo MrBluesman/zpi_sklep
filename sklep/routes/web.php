@@ -90,6 +90,8 @@ Route::get('/albums/delete/{album}', [
     'as' => 'albums.delete'
 ]);
 
+// KOSZYK
+
 Route::get('/addToCart/{album}', [
     'uses' => 'CartController@addToCart',
     'as' => 'cart.addToCart'
@@ -99,6 +101,7 @@ Route::get('/getCart', [
     'uses' => 'CartController@getCart',
     'as' => 'cart.getCart'
 ]);
+
 
 Route::get('/getCart/increment/{album}', [
     'uses' => 'CartController@incrementQuantity',
@@ -114,6 +117,12 @@ Route::get('/getCart/remove/{album}', [
     'uses' => 'CartController@removeItem',
     'as' => 'cart.removeItem'
 ]);
+
+Route::post('/getCart/addDiscountCode', [
+    'uses' => 'CartController@addDiscountCode',
+    'as' => 'cart.addDiscountCode'
+]);
+
 
 //KOD RABATOWY
 Route::get('/discountCodes',[

@@ -37,13 +37,49 @@
             </ul>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
 
-            <strong>Total: {{ $totalprice }}</strong>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
 
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                      <div class="row">
+                          <label class="col-md-3 control-label" style="display:block;">Kod rabatowy</label>
+                          <div style="float:right;margin-right: 20px;">
+                            Razem: {{$totalprice}} zł
+                        </div>
+                      </div>
+                    <form  method="post" action="{{ route('cart.addDiscountCode') }}">
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                      <div class="row">
+                          <div class="col-md-3">
+                            <input id="discountCode" type="text" class="form-control" name="discountCode" >
+                          </div>
+                          <button type="submit" class="btn btn-primary">
+                              Dodaj
+                          </button>
+
+                          <div style="float:right;margin-right: 20px;">
+                            @if (!empty($code))
+                            Zniżka: {{$code * 100}} %
+                            @endif
+                          </div>
+
+                          </br>
+                        <div style="float:right;margin-right: 20px;">
+                          @php ($total = number_format((1 - $code) * $totalprice, 2))
+                              <strong>Do zapłaty: {{$total}}</strong>
+                          </div>
+                      </div>
+                    </form>
+                    </div>
+              </div>
+            </div>
         </div>
-    </div>
+
+
+
+
     <hr>
     <div class="row">
         <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">

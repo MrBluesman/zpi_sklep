@@ -10,11 +10,22 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Session;
+use Storage;
 
 class AlbumsController extends Controller
 {
   public function index() {
     $albums = Album::with('Artist')->get();
+      /*foreach($albums as $album){
+          if($album->plik == null ){}
+          else{
+
+              $url = Storage::url($album->plik);
+
+              return $url;
+          }
+
+      }*/
     return view('albums.index', compact('albums'));
   }
 
@@ -40,6 +51,7 @@ class AlbumsController extends Controller
 
         //Album::create($request->all());
         //dd($request->all());
+
         $album = new Album();
         $album->tytul = $request->input('tytul');
         $album->rok = $request->input('rok');
@@ -49,6 +61,13 @@ class AlbumsController extends Controller
         $album->dostepnosc = $request->input('dostepnosc');
         $album->artystaid = $request->input('artystaid');
         $album->gatunekid = $request->input('gatunekid');
+        if ($request->hasFile('plik'))  {
+            $file = request()->file('plik')->store('public/images');
+            $url = Storage::url($file);
+            //$path = $file->path();
+            $album->plik = $url;
+            //return Storage::url($file);
+        }
         $album->save();
         return \redirect()->route('albums.index');
     }

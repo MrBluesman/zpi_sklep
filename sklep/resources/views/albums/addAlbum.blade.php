@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <form action="{{route('albums.save')}}" method="post">
+                    <form action="{{route('albums.save')}}" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <div class="form-group ">
                             <label class="control-label " for="tytul">
@@ -70,6 +70,11 @@
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="plik">
+                                <input type="file" id="plik" name="plik" >
+                            </label>
                         </div>
                         <div class="form-group">
                             <div>

@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Album extends Model
 {
-  protected $fillable = ['tytul', 'rok', 'data_wydania', 'cena_fizyczna', 'cena_cyfrowa', 'dostepnosc'];
+  protected $fillable = ['tytul', 'rok', 'data_wydania', 'cena_fizyczna', 'cena_cyfrowa', 'dostepnosc', 'plik'];
   protected $table = 'plyta';
   protected $primaryKey = 'plyta_id';
-  public $timestamps = false;
+
+
+    public $timestamps = false;
 
     public function artist()
     {

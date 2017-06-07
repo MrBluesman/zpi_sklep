@@ -9,7 +9,13 @@
   @foreach($albums as $album)
   @if(($loop->index) % 2 == 0)
   <tr>
-    @endif<td> OKLADKA </td>
+    @endif
+      <td>
+          @if($album->plik == null ){OKLADKA}
+          @else
+            <img src="{{$album->plik}}"/>
+          @endif
+      </td>
     <td>
 <table class="table table-bordered">
         <tr><td>{{$album->tytul}} ({{$album->rok}})</td></tr>

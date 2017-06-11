@@ -36,6 +36,42 @@ class User extends Authenticatable
       return $this->belongsTo('App\AccountType', 'typ_kontaId');
     }
 
+    public function roles()
+    {
+        return $this->belongsToMany(Roles::class, 'roles_has_users', 'users_id', 'roles_id')->withTimestamps();
+    }
+
+    public function hasAnyRole($roles)
+    {
+        if(is_array($roles))
+        {
+            foreach($roles as $role)
+            {
+                if($this->hasRole($role))
+                {
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            if($this->hasRole($roles))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasRole($role)
+    {
+        if($this->roles()->where('name', $role)->first())
+        {
+            return true;
+        }
+        return false;
+    }
+
     // public function address()
     // {
     //   return $this->hasOne('App\ShippingAddress', 'adres_id', 'adresId');

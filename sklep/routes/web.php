@@ -217,6 +217,11 @@ Route::group([
         'as' => 'artists.updateArtist'
     ]);
 
+    Route::delete('artists/{artist}', [
+        'uses' => 'ArtistsController@destroyArtist',
+        'as' => 'artists.delete'
+    ]);
+
     Route::get('/artists/{artist}',[
         'uses' => 'ArtistsController@details',
         'as' => 'artists.details'

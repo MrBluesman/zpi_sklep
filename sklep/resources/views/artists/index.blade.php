@@ -15,8 +15,26 @@
         <tr>
             <td><a href="{{route('artists.details', $artist)}}">{{$artist->nazwa}}</a></td>
             <td>{{$artist->opis}}</td>
-            <td><a href="{{ route('artists.editArtist', $artist) }}" type="button" class="btn btn-info">Edytuj</a></td>
-            <td></td>
+            <td>
+                <div class="form-group">
+                    <div class="col-md-6 col-md-offset-4">
+                        <a href="{{ route('artists.editArtist', $artist) }}" type="button" class="btn btn-info">Edytuj</a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <form class="form-horizontal" role="form" method="POST" action="{{ route('artists.delete', $artist) }}">
+                    <input name="_method" type="hidden" value="DELETE">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-4">
+                            <button type="submit" class="btn btn-danger">
+                                Usuń
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </td>
         </tr>
         @endforeach
     </table>

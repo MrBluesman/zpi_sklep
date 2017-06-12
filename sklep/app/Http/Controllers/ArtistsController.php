@@ -61,6 +61,12 @@ class ArtistsController extends Controller
         return view('artists.details', compact('artist'));
     }
 
+    public function destroyArtist(Artist $artist)
+    {
+        $artist->delete();
+        return \redirect()->route('artists.index');
+    }
+
 
 
 }

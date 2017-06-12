@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function ()
-{
-    return view('home.home');
-});
+
 
 //Route::get('/', function () {
 //
@@ -35,8 +32,6 @@ Route::get('/', function ()
 //});
 
 
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
@@ -47,33 +42,16 @@ Route::group([
     'roles' => ['user']
 ], function()
 {
-    //turaj routingi
-    //ARTYŚCI
-
-    Route::get('/artists',[
-        'uses' => 'ArtistsController@index',
-        'as' => 'artists.index'
-    ]);
-
-    Route::get('/artists/add',[
-        'uses' => 'ArtistsController@addArtist',
-        'as' => 'artists.addArtist'
-    ]);
+    //tutaj routingi
 
 
-    Route::post('/artists/save',[
-        'uses' => 'ArtistsController@saveArtist',
-        'as' => 'artists.saveArtist'
-    ]);
 
-    Route::get('/artists/{artist}',[
-        'uses' => 'ArtistsController@details',
-        'as' => 'artists.details'
-    ]);
+    Route::get('/', function ()
+    {
+        return view('home.home');
+    });
 
-
-//ALBUMY
-
+    //ALBUMY - wersja dla użytkownika! Nie moze dodawac i usuwac! To przeniesc do pracownika
     Route::get('/albums', [
         'uses' => 'AlbumsController@index',
         'as' => 'albums.index'
@@ -137,8 +115,103 @@ Route::group([
         'as' => 'cart.addDiscountCode'
     ]);
 
+});
 
-//KOD RABATOWY
+//TREŚC TYLKO DLA PRACOWNIKÓW - Routingi
+Route::group([
+    'middleware' => 'roles',
+    'roles' => ['prac']
+], function()
+{
+    //tutaj routingi
+
+    Route::get('/', function ()
+    {
+        return view('home.homePrac');
+    });
+
+    //ARTYŚCI - wersja dla pracowników
+    Route::get('/artists',[
+        'uses' => 'ArtistsController@index',
+        'as' => 'artists.index'
+    ]);
+
+    Route::get('/artists/add',[
+        'uses' => 'ArtistsController@addArtist',
+        'as' => 'artists.addArtist'
+    ]);
+
+
+    Route::post('/artists/save',[
+        'uses' => 'ArtistsController@saveArtist',
+        'as' => 'artists.saveArtist'
+    ]);
+
+    Route::get('/artists/{artist}',[
+        'uses' => 'ArtistsController@details',
+        'as' => 'artists.details'
+    ]);
+
+    //KOD RABATOWY - wersja dla pracownika
+    Route::get('/discountCodes',[
+        'uses' => 'DiscountCodesController@index',
+        'as' => 'discountCodes.index'
+    ]);
+
+    Route::get('/discountCodes/add',[
+        'uses' => 'DiscountCodesController@addCode',
+        'as' => 'discountCodes.addCode'
+    ]);
+
+
+    Route::post('/discountCodes/save',[
+        'uses' => 'DiscountCodesController@saveCode',
+        'as' => 'discountCodes.saveCode'
+    ]);
+
+    Route::get('/discountCodes/delete/{code}',[
+        'uses' => 'DiscountCodesController@deleteCode',
+        'as' => 'discountCodes.deleteCode'
+    ]);
+});
+
+//TREŚC TYLKO DLA ADMINISTRATORA - Routingi
+Route::group([
+    'middleware' => 'roles',
+    'roles' => ['admin']
+], function()
+{
+
+
+    //tutaj routingi
+    Route::get('/', function ()
+    {
+        return view('home.homeAdmin');
+    });
+
+    //ARTYŚCI - wersja dla administratora
+    Route::get('/artists',[
+        'uses' => 'ArtistsController@index',
+        'as' => 'artists.index'
+    ]);
+
+    Route::get('/artists/add',[
+        'uses' => 'ArtistsController@addArtist',
+        'as' => 'artists.addArtist'
+    ]);
+
+
+    Route::post('/artists/save',[
+        'uses' => 'ArtistsController@saveArtist',
+        'as' => 'artists.saveArtist'
+    ]);
+
+    Route::get('/artists/{artist}',[
+        'uses' => 'ArtistsController@details',
+        'as' => 'artists.details'
+    ]);
+
+    //KOD RABATOWY - wersja dla administratora
     Route::get('/discountCodes',[
         'uses' => 'DiscountCodesController@index',
         'as' => 'discountCodes.index'
@@ -160,7 +233,7 @@ Route::group([
         'as' => 'discountCodes.deleteCode'
     ]);
 
-    //ZARZĄDZANIE UŻYTKOWNIKAMI
+    //ZARZĄDZANIE UŻYTKOWNIKAMI - administrator
     Route::get('/userManagementPanel',[
         'uses' => 'UserManagementPanelController@index',
         'as' => 'userManagementPanel.index'
@@ -175,24 +248,6 @@ Route::group([
         'uses' => 'UserManagementPanelController@unblockUser',
         'as' => 'userManagementPanel.unblockUser'
     ]);
-});
-
-//TREŚC TYLKO DLA PRACOWNIKÓW - Routingi
-Route::group([
-    'middleware' => 'roles',
-    'roles' => ['prac']
-], function()
-{
-    //tutaj routingi
-});
-
-//TREŚC TYLKO DLA ADMINISTRATORA - Routingi
-Route::group([
-    'middleware' => 'roles',
-    'roles' => ['admin']
-], function()
-{
-    //tutaj routingi
 });
 
 

@@ -34,7 +34,12 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
+
+//Route::get('/', function ()
+//{
+//    return view('home');
+//});
 
 //TREŚC TYLKO DLA UŻYTKOWNIKÓW - Routingi
 Route::group([
@@ -46,10 +51,15 @@ Route::group([
 
 
 
-    Route::get('/', function ()
+    Route::get('/homeUser', function ()
     {
         return view('home.home');
     });
+
+//    Route::get('/home', function ()
+//    {
+//        return view('home.home');
+//    });
 
     //ALBUMY - wersja dla użytkownika! Nie moze dodawac i usuwac! To przeniesc do pracownika
     Route::get('/albums', [
@@ -125,10 +135,15 @@ Route::group([
 {
     //tutaj routingi
 
-    Route::get('/', function ()
+    Route::get('/homePrac', function ()
     {
         return view('home.homePrac');
     });
+
+//    Route::get('/home', function ()
+//    {
+//        return view('home.homePrac');
+//    });
 
     //ARTYŚCI - wersja dla pracowników
     Route::get('/artists',[
@@ -184,10 +199,15 @@ Route::group([
 
 
     //tutaj routingi
-    Route::get('/', function ()
+    Route::get('/homeAdmin', function ()
     {
         return view('home.homeAdmin');
     });
+//
+//    Route::get('/home', function ()
+//    {
+//        return view('home.homeAdmin');
+//    });
 
     //ARTYŚCI - wersja dla administratora
     Route::get('/artists',[

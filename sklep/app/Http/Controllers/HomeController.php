@@ -12,10 +12,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
     /**
      * Show the application dashboard.
@@ -24,19 +24,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->hasRole('user'))
+        if(Auth::user()!=null && Auth::user()->hasRole('user'))
         {
             return view('home.home');
         }
-        else if(Auth::user()->hasRole('prac'))
+        else if(Auth::user()!=null && Auth::user()->hasRole('prac'))
         {
             return view('home.homePrac');
         }
-        else if(Auth::user()->hasRole('admin'))
+        else if(Auth::user()!=null && Auth::user()->hasRole('admin'))
         {
             return view('home.homeAdmin');
         }
         //dla gościa
-        return view('home');
+        else return view('home');
     }
 }

@@ -181,6 +181,12 @@ Route::group([
         'uses' => 'UserManagementPanelController@unblockUser',
         'as' => 'userManagementPanel.unblockUser'
     ]);
+
+    //ZARZĄDZANIE UŻYTKOWNIKAMI - administrator
+    Route::get('/pracManagementPanel',[
+        'uses' => 'PracManagementPanelController@index',
+        'as' => 'pracManagementPanel.index'
+    ]);
 });
 
 //TREŚC WSPÓLNA DLA ADMINISTRATORA - Routingi (Administrator ma też uprawnienia pracownika)

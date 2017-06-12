@@ -15,7 +15,12 @@ class UserManagementPanelController extends Controller {
   public function index()
   {
     //wyświetlanie
-    $users = User::with('typKonta')->get();
+//    $users = User::with('typKonta')->get();
+      $users = DB::table('osoba')
+          ->join('roles_has_users', 'osoba.osoba_id', '=', 'roles_has_users.users_id')
+          ->select('osoba.*')
+          ->where('roles_has_users.roles_id','=','1')
+          ->get();
     //$users = User::all();
      return view('userManagementPanel.index',compact('users'));
   }

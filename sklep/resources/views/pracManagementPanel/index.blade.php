@@ -22,11 +22,15 @@
             <td>{{$user->email}}</td>
             <td>{{$user->pesel}}</td>
             <td>{{$user->nr_telefonu}}</td>
+            <td>
+                {{--{{ dd($user) }}--}}
+                <a href="{{ route('pracManagementPanel.edit', $user->osoba_id) }}" class="btn btn-primary btn-xs">Edytuj</a>
             @if($user->zbanowany == 0)
-              <td><a href="{{ route('userManagementPanel.blockUser', $user->osoba_id) }}" class="btn btn-danger btn-xs">Zablokuj</a></td>
+              <a href="{{ route('userManagementPanel.blockUser', $user->osoba_id) }}" class="btn btn-danger btn-xs">Zablokuj</a>
             @else
-              <td><a href="{{ route('userManagementPanel.unblockUser', $user->osoba_id) }}" class="btn btn-warning btn-xs">Odblokuj</a></td>
+              <a href="{{ route('userManagementPanel.unblockUser', $user->osoba_id) }}" class="btn btn-warning btn-xs">Odblokuj</a>
             @endif
+            </td>
 
         </tr>
         @endforeach

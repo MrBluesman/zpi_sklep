@@ -197,6 +197,16 @@ Route::group([
         'uses' => 'PracManagementPanelController@save',
         'as' => 'pracManagementPanel.save'
     ]);
+
+    Route::get('/pracManagementPanel/edit/{userID}',[
+        'uses' => 'pracManagementPanelController@edit',
+        'as' => 'pracManagementPanel.edit'
+    ]);
+
+    Route::post('/pracManagementPanel/{user}',[
+        'uses' => 'pracManagementPanelController@update',
+        'as' => 'pracManagementPanel.update'
+    ]);
 });
 
 //TREŚC WSPÓLNA DLA ADMINISTRATORA - Routingi (Administrator ma też uprawnienia pracownika)

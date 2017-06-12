@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDO;
 
 class PracManagementPanelController extends Controller
 {
@@ -16,12 +17,18 @@ class PracManagementPanelController extends Controller
     {
         //wyświetlanie
         //$users = User::with('typKonta')->get();
-        $users = DB::table('osoba')
+        //DB::setFetchMode(PDO::FETCH_ASSOC);
+        //DB::setFetchMode(\PDO::FETCH_ASSOC);
+        $usersQuery = DB::table('osoba')
             ->join('roles_has_users', 'osoba.osoba_id', '=', 'roles_has_users.users_id')
             ->select('osoba.*')
             ->where('roles_has_users.roles_id','=','2')
-            ->get();
-        //$users = User::all();
+            ->get()->all();
+        //DB::setFetchMode(PDO::FETCH_CLASS);
+       //$users = $usersQuery->toArray();
+        $users = collect($usersQuery)->toArray();
+            //->get();
+        //$users = $users.
         return view('pracManagementPanel.index',compact('users'));
     }
 
@@ -43,6 +50,24 @@ class PracManagementPanelController extends Controller
         $user->save();
         $user->roles()->attach(2);
 
+        return \redirect()->route('pracManagementPanel.index');
+    }
+
+    public function edit($userID)
+    {
+        $user = User::where('osoba_id', $userID)->first();
+
+        return view('pracManagementPanel.edit', compact('user'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $user->email = $request->input('email');
+        $user->imie = $request->input('imie');
+        $user->nazwisko = $request->input('nazwisko');
+        $user->pesel = $request->input('pesel');
+        $user->nr_telefonu = $request->input('nr_telefonu');
+        $user->save();
         return \redirect()->route('pracManagementPanel.index');
     }
 

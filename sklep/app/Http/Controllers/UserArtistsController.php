@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Album;
 use App\Artist;
 use Illuminate\Http\Request;
 
@@ -11,6 +12,8 @@ class UserArtistsController extends Controller
     {
         //wyświetlanie
         $artists = Artist::all();
+
+
 
         return view('userArtists.index', compact('artists'));
         //lub
@@ -22,6 +25,7 @@ class UserArtistsController extends Controller
     public function details(Artist $artist)
     {
         //dd($artist->all());
-        return view('userArtists.details', compact('artist'));
+        $albums = Album::where('artystaId', $artist->artysta_id)->get();
+        return view('userArtists.details', compact('artist', 'albums'));
     }
 }

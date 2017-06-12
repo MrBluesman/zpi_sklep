@@ -23,7 +23,7 @@ class CartController extends Controller
 
       $request->session()->put('cart',$cart);
       //dd($request->session()->get('cart'));
-      return redirect()->route('albums.index');
+      return Redirect::back();
   }
 
 

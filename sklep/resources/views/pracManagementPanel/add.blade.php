@@ -132,6 +132,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Zatrudnij
                                     </button>
+                                    <a href="{{ route('pracManagementPanel.index') }}" type="button" class="btn btn-default">Wróć</a>
                                 </div>
                             </div>
                         </form>

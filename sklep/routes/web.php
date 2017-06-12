@@ -207,6 +207,11 @@ Route::group([
         'uses' => 'pracManagementPanelController@update',
         'as' => 'pracManagementPanel.update'
     ]);
+
+    Route::delete('/pracManagementPanel/{userID}',[
+        'uses' => 'pracManagementPanelController@destroy',
+        'as' => 'pracManagementPanel.destroy'
+    ]);
 });
 
 //TREŚC WSPÓLNA DLA ADMINISTRATORA - Routingi (Administrator ma też uprawnienia pracownika)

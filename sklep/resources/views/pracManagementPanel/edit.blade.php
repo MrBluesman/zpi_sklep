@@ -130,6 +130,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Edytuj informacje o pracowniku
                                     </button>
+                                    <a href="{{ route('pracManagementPanel.index') }}" type="button" class="btn btn-default">Wróć</a>
                                 </div>
                             </div>
                         </form>

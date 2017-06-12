@@ -25,11 +25,18 @@
             <td>
                 {{--{{ dd($user) }}--}}
                 <a href="{{ route('pracManagementPanel.edit', $user->osoba_id) }}" class="btn btn-primary btn-xs">Edytuj</a>
-            @if($user->zbanowany == 0)
-              <a href="{{ route('userManagementPanel.blockUser', $user->osoba_id) }}" class="btn btn-danger btn-xs">Zablokuj</a>
-            @else
-              <a href="{{ route('userManagementPanel.unblockUser', $user->osoba_id) }}" class="btn btn-warning btn-xs">Odblokuj</a>
-            @endif
+              {{--<a href="{{ route('pracManagementPanel.destroy', $user->osoba_id) }}" class="btn btn-danger btn-xs">Zwolnij</a>--}}
+                <form class="form-horizontal" role="form" method="POST" action="{{ route('pracManagementPanel.destroy', $user->osoba_id) }}">
+                    <input name="_method" type="hidden" value="DELETE">
+                    {{ csrf_field() }}
+                    {{--<div class="form-group">--}}
+                        {{--<div class="col-md-6 col-md-offset-4">--}}
+                            <button type="submit" class="btn btn-danger btn-xs">
+                                Zwolnij
+                            </button>
+                        {{--</div>--}}
+                    {{--</div>--}}
+                </form>
             </td>
 
         </tr>

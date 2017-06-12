@@ -71,6 +71,13 @@ class PracManagementPanelController extends Controller
         return \redirect()->route('pracManagementPanel.index');
     }
 
+    public function destroy($userID)
+    {
+        $user = User::where('osoba_id', $userID)->first();
+        $user->delete();
+        return \redirect()->route('pracManagementPanel.index');
+    }
+
 //    public function blockUser($userID)
 //    {
 //        $user = User::where('osoba_id', $userID)->first();

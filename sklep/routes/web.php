@@ -182,10 +182,20 @@ Route::group([
         'as' => 'userManagementPanel.unblockUser'
     ]);
 
-    //ZARZĄDZANIE UŻYTKOWNIKAMI - administrator
+    //ZARZĄDZANIE PRACOWNIKAMI - administrator
     Route::get('/pracManagementPanel',[
         'uses' => 'PracManagementPanelController@index',
         'as' => 'pracManagementPanel.index'
+    ]);
+
+    Route::get('/pracManagementPanel/add',[
+        'uses' => 'PracManagementPanelController@add',
+        'as' => 'pracManagementPanel.add'
+    ]);
+
+    Route::post('/pracManagementPanel/save',[
+        'uses' => 'PracManagementPanelController@save',
+        'as' => 'pracManagementPanel.save'
     ]);
 });
 

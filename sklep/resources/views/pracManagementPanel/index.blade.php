@@ -31,5 +31,6 @@
         </tr>
         @endforeach
     </table>
-    <div><a href="{{ url('/') }}" type="button" class="btn btn-default">Wróć</a></div>
+    <a href="{{ route('pracManagementPanel.add') }}" type="button" class="btn btn-primary">Zatrudnij nowego pracownika</a>
+    <a href="{{ url('/') }}" type="button" class="btn btn-default">Wróć</a>
 @endsection

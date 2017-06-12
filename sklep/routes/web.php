@@ -207,6 +207,16 @@ Route::group([
         'as' => 'artists.saveArtist'
     ]);
 
+    Route::get('/artists/edit/{artist}',[
+        'uses' => 'ArtistsController@editArtist',
+        'as' => 'artists.editArtist'
+    ]);
+
+    Route::post('/artists/{artist}',[
+        'uses' => 'ArtistsController@updateArtist',
+        'as' => 'artists.updateArtist'
+    ]);
+
     Route::get('/artists/{artist}',[
         'uses' => 'ArtistsController@details',
         'as' => 'artists.details'

@@ -42,6 +42,19 @@ class ArtistsController extends Controller
         return \redirect()->route('artists.index');
     }
 
+    public function editArtist(Artist $artist)
+    {
+        return view('artists.edit', compact('artist'));
+    }
+
+    public function updateArtist(Request $request, Artist $artist)
+    {
+        $artist->nazwa = $request->input('nazwa');
+        $artist->opis = $request->input('opis');
+        $artist->save();
+        return \redirect()->route('artists.index');
+    }
+
     public function details(Artist $artist)
     {
         //dd($artist->all());

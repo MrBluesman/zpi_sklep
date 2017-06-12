@@ -1,14 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Płyty')
-
-
-@section('koszyk')
-    @if(Auth::user()!=null && Auth::user()->hasRole('user'))
-    <a href="{{ route('cart.getCart') }}"><i class="fa fa-shopping-cart " aria-hidden="true"></i>Koszyk
-        <span class="badge"> {{ Session::has('cart') ? Session::get('cart')->totalQty : ''}} </span></a>
-    @endif
-@endsection
+    
 
 @section('content')
 {{-- {{ URL::asset('css/table.css'); }} --}}

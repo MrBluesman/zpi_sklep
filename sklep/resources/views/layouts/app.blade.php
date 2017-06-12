@@ -55,7 +55,10 @@
                         @else
                             <li>
 
-                                @yield('koszyk');
+                                @if(Auth::guest() || Auth::user()->hasRole('user'))
+                                    <a href="{{ route('cart.getCart') }}"><i class="fa fa-shopping-cart " aria-hidden="true"></i>Koszyk
+                                        <span class="badge"> {{ Session::has('cart') ? Session::get('cart')->totalQty : ''}} </span></a>
+                                @endif
 
                             </li>
                             <li class="dropdown">

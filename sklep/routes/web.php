@@ -61,6 +61,17 @@ Route::group([
 //        return view('home.home');
 //    });
 
+    //ARTYŚCI - wersja dla użytkownika! Nie może dodawać i usuwać, tylko przeglądać
+    Route::get('/userArtists',[
+        'uses' => 'UserArtistsController@index',
+        'as' => 'userArtists.index'
+    ]);
+
+    Route::get('/userArtists/{artist}',[
+        'uses' => 'userArtistsController@details',
+        'as' => 'userArtists.details'
+    ]);
+
     //ALBUMY - wersja dla użytkownika! Nie moze dodawac i usuwac! To przeniesc do pracownika
     Route::get('/albums', [
         'uses' => 'AlbumsController@index',

@@ -36,7 +36,6 @@ class HomeController extends Controller
         {
             return view('home.homeAdmin');
         }
-        //dla gościa
         else return view('home');
     }
 }

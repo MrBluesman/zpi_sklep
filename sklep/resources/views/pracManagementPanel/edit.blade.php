@@ -124,6 +124,8 @@
                                 </div>
                             </div>
 
+                            {{--{!! Form::hidden('id', $user->id) !!}--}}
+                            <input type="hidden" name="id" value="{{ $user->osoba_id }}">
 
                             <div class="form-group">
                                 <div class="col-md-4 col-md-offset-5 text-center">

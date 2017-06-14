@@ -5,8 +5,13 @@
 @section('content')
     <form action="{{route('artists.saveArtist')}}" method="POST">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <div class="form-group">
+        <div class="form-group{{ $errors->has('nazwa') ? ' has-error' : '' }}">
             <input type="text" name="nazwa" class="form-control" placeholder="Podaj nazwę artysty/zespołu">
+            @if ($errors->has('nazwa'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('nazwa') }}</strong>
+                </span>
+            @endif
         </div>
         <div class="form-group">
             <textarea name="opis" class="form-control" placeholder="Podaj opis artysty"></textarea>

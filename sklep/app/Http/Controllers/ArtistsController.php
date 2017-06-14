@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Artist;
+use App\Http\Requests\ArtistAddRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -30,8 +31,9 @@ class ArtistsController extends Controller
         return view('artists.addArtist');
     }
 
-    public function saveArtist(Request $request)
+    public function saveArtist(ArtistAddRequest $request)
     {
+        //dd($request);
         Artist::create($request->all());
         //metoda 2
 //        $artist = new Artist();
@@ -63,9 +65,11 @@ class ArtistsController extends Controller
 
     public function destroyArtist(Artist $artist)
     {
+        //$user = User::where('osoba_id', $userID)->first();
         $artist->delete();
         return \redirect()->route('artists.index');
     }
+
 
 
 

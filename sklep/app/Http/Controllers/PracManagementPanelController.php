@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PracRequest;
+use App\Http\Requests\PracAddRequest;
+use App\Http\Requests\PracEditRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +39,7 @@ class PracManagementPanelController extends Controller
         return view('pracManagementPanel.add');
     }
 
-    public function save(PracRequest $request)
+    public function save(PracAddRequest $request)
     {
         $user = new \App\User();
         $user->imie = $request->input('imie');
@@ -61,7 +62,7 @@ class PracManagementPanelController extends Controller
         return view('pracManagementPanel.edit', compact('user'));
     }
 
-    public function update(PracRequest $request, User $user)
+    public function update(PracEditRequest $request, User $user)
     {
         $user->email = $request->input('email');
         $user->imie = $request->input('imie');

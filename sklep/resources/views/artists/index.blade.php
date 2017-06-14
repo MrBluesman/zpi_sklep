@@ -40,5 +40,5 @@
     </table>
     <a href="{{ route('artists.addArtist') }}" type="button" class="btn btn-primary">Dodaj artystę</a>
     {{--<div><a href="{{ route('artists.index') }}" type="button" class="btn btn-default">Wróć</a></div>--}}
-    <a class="btn btn-default" href="{{ URL::previous() }}">Wróć</a>
+    <a class="btn btn-default" href="{{ route('home.index') }}">Wróć</a>
 @endsection

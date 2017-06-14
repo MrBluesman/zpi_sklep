@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Artist;
 use App\Http\Requests\ArtistAddRequest;
+use App\Http\Requests\ArtistEditRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -49,7 +50,7 @@ class ArtistsController extends Controller
         return view('artists.edit', compact('artist'));
     }
 
-    public function updateArtist(Request $request, Artist $artist)
+    public function updateArtist(ArtistEditRequest $request, Artist $artist)
     {
         $artist->nazwa = $request->input('nazwa');
         $artist->opis = $request->input('opis');

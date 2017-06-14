@@ -75,6 +75,10 @@ Route::group([
     ]);
 
     //ALBUMY - wersja dla uzytkownika! Nie może dodawać i usuwać, tylko przeglądać
+    Route::get('/userAlbums', [
+        'uses' => 'UserAlbumsController@index',
+        'as' => 'userAlbums.index'
+    ]);
 
     // KOSZYK
 

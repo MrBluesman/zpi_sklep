@@ -53,9 +53,6 @@ Route::group([
 ], function()
 {
     //tutaj routingi
-
-
-
     Route::get('/homeUser', function ()
     {
         return view('home.home');
@@ -77,38 +74,9 @@ Route::group([
         'as' => 'userArtists.details'
     ]);
 
-    //ALBUMY - wersja dla użytkownika! Nie moze dodawac i usuwac! To przeniesc do pracownika
-    Route::get('/albums', [
-        'uses' => 'AlbumsController@index',
-        'as' => 'albums.index'
-    ]);
+    //ALBUMY - wersja dla uzytkownika! Nie może dodawać i usuwać, tylko przeglądać
 
-    Route::get('/albums/add', [
-        'uses' => 'AlbumsController@add',
-        'as' => 'albums.add'
-    ]);
-
-    Route::post('/albums/save', [
-        'uses' => 'AlbumsController@save',
-        'as' => 'albums.save'
-    ]);
-
-    Route::get('/albums/{album}', [
-        'uses' => 'AlbumsController@edit',
-        'as' => 'albums.edit'
-    ]);
-
-    Route::post('/albums/edit/{album}', [
-        'uses' => 'AlbumsController@change',
-        'as' => 'albums.change'
-    ]);
-
-    Route::get('/albums/delete/{album}', [
-        'uses' => 'AlbumsController@delete',
-        'as' => 'albums.delete'
-    ]);
-
-// KOSZYK
+    // KOSZYK
 
     Route::get('/addToCart/{album}', [
         'uses' => 'CartController@addToCart',
@@ -142,6 +110,8 @@ Route::group([
     ]);
 
 });
+
+
 
 //TREŚC TYLKO DLA PRACOWNIKÓW - Routingi
 Route::group([
@@ -219,7 +189,7 @@ Route::group([
     ]);
 });
 
-//TREŚC WSPÓLNA DLA ADMINISTRATORA - Routingi (Administrator ma też uprawnienia pracownika)
+//TREŚC WSPÓLNA DLA ADMINISTRATORA I PRACOWNIKA - Routingi (Administrator ma też uprawnienia pracownika)
 Route::group([
     'middleware' => 'roles',
     'roles' => ['prac', 'admin']
@@ -272,6 +242,37 @@ Route::group([
     Route::get('/artists/{artist}',[
         'uses' => 'ArtistsController@details',
         'as' => 'artists.details'
+    ]);
+
+    //ALBUMY - wersja dla pracownika - pełna funkcjonalność, dodawanie, usuwanie
+    Route::get('/albums', [
+        'uses' => 'AlbumsController@index',
+        'as' => 'albums.index'
+    ]);
+
+    Route::get('/albums/add', [
+        'uses' => 'AlbumsController@add',
+        'as' => 'albums.add'
+    ]);
+
+    Route::post('/albums/save', [
+        'uses' => 'AlbumsController@save',
+        'as' => 'albums.save'
+    ]);
+
+    Route::get('/albums/{album}', [
+        'uses' => 'AlbumsController@edit',
+        'as' => 'albums.edit'
+    ]);
+
+    Route::post('/albums/edit/{album}', [
+        'uses' => 'AlbumsController@change',
+        'as' => 'albums.change'
+    ]);
+
+    Route::get('/albums/delete/{album}', [
+        'uses' => 'AlbumsController@delete',
+        'as' => 'albums.delete'
     ]);
 
     //KOD RABATOWY - wersja dla pracownika

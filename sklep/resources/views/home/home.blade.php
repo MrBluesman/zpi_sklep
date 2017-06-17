@@ -68,8 +68,10 @@
                         //data.osoba = undefined;
                         {{--{{ $data = data; }}--}}
                         {{--{{route('userArtists.details', $data)}}--}}
-
-                        return '<a href="userArtists/' + data.id  + '" class="list-group-item">' + data.nazwa + ' -<b> ' + data.klasa +  '</b> </a>'
+                        if(data.klasa == 'artysta')
+                            return '<a href="userArtists/' + data.id  + '" class="list-group-item">' + data.nazwa + ' -<b> ' + data.klasa +  '</b> </a>'
+                        else
+                            return '<a href="userAlbums/' + data.id  + '" class="list-group-item">' + data.nazwa + ' -<b> ' + data.klasa +  '</b> </a>'
                     }
                 }
             });

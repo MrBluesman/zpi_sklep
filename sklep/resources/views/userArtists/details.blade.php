@@ -29,4 +29,6 @@
     @endforeach
 
     <div><a href="{{ route('userArtists.index') }}" type="button" class="btn btn-default">Wróć</a></div>
+    {{--<div><a href="{{ URL::previous() }}" type="button" class="btn btn-default">Wróć</a></div>--}}
+
 @endsection

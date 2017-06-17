@@ -4,23 +4,42 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class User extends Authenticatable
 {
-    protected $table = 'Osoba';
+    protected $table = 'osoba';
     protected $primaryKey = 'osoba_id';
     public $timestamps = false;
 
     use Notifiable;
+    //wyszukiwanie - test
+//    use SearchableTrait;
+
+    protected $fillable = [
+        'adresId', 'typ_kontaId', 'imie', 'nazwisko', 'pesel', 'email', 'nr_telefonu', 'name', 'password', 'zbanowany'
+    ];
+
+//    protected $searchable = [
+//        'columns' => [
+//            'osoba.email' => 10,
+//            'osoba.adresId' => 5
+////            'profiles.username' => 5,
+////            'profiles.bio' => 3,
+////            'profiles.country' => 2,
+////            'profiles.city' => 1,
+//        ],
+////        'joins' => [
+////            'profiles' => ['users.id','profiles.user_id'],
+////        ],
+//    ];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'adresId', 'typ_kontaId', 'imie', 'nazwisko', 'pesel', 'email', 'nr_telefonu', 'name', 'password', 'zbanowany'
-    ];
+
 
     /**
      * The attributes that should be hidden for arrays.

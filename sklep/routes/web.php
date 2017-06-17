@@ -63,6 +63,12 @@ Route::group([
 //        return view('home.home');
 //    });
 
+    //wyszukiwanie
+    Route::get('/find', [
+        'uses' => 'SearchController@find',
+        'as' => 'search'
+    ]);
+
     //ARTYŚCI - wersja dla użytkownika! Nie może dodawać i usuwać, tylko przeglądać
     Route::get('/userArtists',[
         'uses' => 'UserArtistsController@index',

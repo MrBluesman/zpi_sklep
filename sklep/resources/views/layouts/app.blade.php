@@ -14,6 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
+    @yield('scripts')
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -92,5 +93,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>

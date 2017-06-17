@@ -21,4 +21,12 @@ class UserAlbumsController extends Controller
         }*/
         return view('userAlbums.index', compact('albums'));
     }
+
+    public function details(Album $album)
+    {
+        //dd($artist->all());
+        //$albums = Album::where('plyta_id', $album->plyta_id)->get();
+        //return view('userAlbums.details', compact('artist', 'albums'));
+        return view('userAlbums.details', compact('album'));
+    }
 }

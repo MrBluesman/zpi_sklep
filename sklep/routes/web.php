@@ -86,6 +86,11 @@ Route::group([
         'as' => 'userAlbums.index'
     ]);
 
+    Route::get('/userAlbums/{album}',[
+        'uses' => 'userAlbumsController@details',
+        'as' => 'userAlbums.details'
+    ]);
+
     // KOSZYK
 
     Route::get('/addToCart/{album}', [

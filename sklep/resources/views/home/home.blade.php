@@ -6,7 +6,7 @@
     {{--action=" {{ route('search') }} "--}}
     <form class="typeahead" role="search" >
         <div class="form-group">
-            <input type="search" name="q" id="search-input" class="form-control" placeholder="Search" autocomplete="off">
+            <input style='width: 200px' type="search" name="q" id="search-input" class="form-control" placeholder="Search" autocomplete="off">
         </div>
     </form>
     <hr>
@@ -68,7 +68,8 @@
                         //data.osoba = undefined;
                         {{--{{ $data = data; }}--}}
                         {{--{{route('userArtists.details', $data)}}--}}
-                        return '<a href="userArtists/' + data.artysta_id  + '" class="list-group-item">' + data.nazwa + ' - @' + data.nazwa + '</a>'
+
+                        return '<a href="userArtists/' + data.id  + '" class="list-group-item">' + data.nazwa + ' -<b> ' + data.klasa +  '</b> </a>'
                     }
                 }
             });

@@ -18,14 +18,33 @@ class SearchController extends Controller
         //$data = Album::search($request->get('q'))->get();
         $data = Artist::where('nazwa','like','%' . $request->get('q') . '%')->get();
         //return User::all();
-//        foreach($data as $index=>$artysta ){
-//            $usersArray[$index] = [
-//                'tytul' => $artysta->nazwa,
-////                'avatar_path' => URL::asset($user->avatar_path)
-//            ];
-//        }
+        $artistArray = array();
+        foreach($data as $index=>$artysta )
+        {
+            $artistArray[$index] = [
+                'nazwa' => $artysta->nazwa,
+                'id' => $artysta->artysta_id,
+                'klasa' => 'artysta',
+//                'avatar_path' => URL::asset($user->avatar_path)
+            ];
+        }
 
-        return response()->json($data);
+
+        $data2 = Album::where('tytul', 'like','%' . $request->get('q') . '%')->get();
+        $albumArray = array();
+        foreach($data2 as $index=>$plyta )
+        {
+            //dd($plyta);
+            $albumArray[$index] = [
+                'nazwa' => $plyta->tytul,
+                'id' => $plyta->plyta_id,
+                'klasa' => 'album',
+//                'avatar_path' => URL::asset($user->avatar_path)
+            ];
+        }
+
+        $result = array_merge($artistArray, $albumArray);
+        return response()->json($result);
 
     }
 }

@@ -93,4 +93,16 @@ class CartController extends Controller
     return \redirect()->route('cart.getCart');
   }
 
+  public function zamow(Request $request){
+      //dd($request);
+      if(!Session::has('cart'))
+      {
+          return view('albums.koszyk', ['cartItems'=> null]);
+      }
+      $oldCart = Session::get('cart');
+      $cart = new Cart($oldCart);
+      //dd(session()->get('cart'));
+      return view('albums.zamowienie', ['cartItems'=> $cart->items, 'totalprice'=>$cart->totalPrice, 'code'=>$cart->discountCode]);
+  }
+
 }

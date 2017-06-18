@@ -124,6 +124,18 @@ Route::group([
         'as' => 'cart.addDiscountCode'
     ]);
 
+    //ZAMÓWIENIE
+
+    Route::get('/zamow', [
+        'uses' => 'CartController@zamow',
+        'as' => 'cart.zamow'
+    ]);
+
+    Route::post('/zamowienie/store', [
+        'uses' => 'ZamowienieController@store',
+        'as' => 'zamowienie.store'
+    ]);
+
 });
 
 

@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Session;
-use Storage;
+//use Storage;
+use Illuminate\Support\Facades\Storage;
 
 class AlbumsController extends Controller
 {
@@ -109,12 +110,7 @@ class AlbumsController extends Controller
         //dd($request->all());
         //echo $id;
         //dd($album->all());
-        $path = $album->plik;
-        $file = basename($path);         // $file is set to "index.php"
-        //echo ($file);
-        //$file = basename($path, ".php");
-        Storage::Delete($file);
-        //File::Delete($album->plik);
+
         $album->delete();
         return \redirect()->route('albums.index');
 

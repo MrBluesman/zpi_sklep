@@ -5,6 +5,7 @@
 @section('content')
 {{-- {{ URL::asset('css/table.css'); }} --}}
 @if(Session::has('cart'))
+
     <div class="row">
         <div class="col-sm-8 col-md-8 col-md-offset-2 col-sm-offset-2">
             <ul class="list-group">
@@ -76,20 +77,17 @@
               </div>
             </div>
         </div>
-
-
-
-
     <hr>
-    <div class="row">
-        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <button type="button" class="btn btn-success">Checkout</button>
-        </div>
-    </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+                <a href="{{ URL::route('cart.zamow')}}" class="btn btn-default">Zamawiam</a>
+            </div>
+         </div>
+
 @else
     <div class="row">
         <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <h2>No Items in Cart!</h2>
+            <h2>Nie masz produktów w koszyku!</h2>
         </div>
     </div>
 @endif

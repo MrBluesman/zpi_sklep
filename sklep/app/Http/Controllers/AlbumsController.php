@@ -87,6 +87,17 @@ class AlbumsController extends Controller
         $album->dostepnosc = $request->input('dostepnosc');
         $album->artystaid = $request->input('artystaid');
         $album->gatunekid = $request->input('gatunekid');
+        if ($request->hasFile('plik'))  {
+            /*$todelete = $album->plik;
+            File::delete($todelete);*/
+            $file = request()->file('plik')->store('public/images');
+            $url = Storage::url($file);
+            //echo ($file);
+            //$path = $file->path();
+            $album->plik = $url;
+            //return Storage::url($file);
+
+        }
         $album->save();
         return \redirect()->route('albums.index');
 
@@ -98,6 +109,12 @@ class AlbumsController extends Controller
         //dd($request->all());
         //echo $id;
         //dd($album->all());
+        $path = $album->plik;
+        $file = basename($path);         // $file is set to "index.php"
+        //echo ($file);
+        //$file = basename($path, ".php");
+        Storage::Delete($file);
+        //File::Delete($album->plik);
         $album->delete();
         return \redirect()->route('albums.index');
 

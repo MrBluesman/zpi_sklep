@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PozycjeZamowienia;
+use App\Status;
 use Illuminate\Http\Request;
 use App\Cart;
 use App\Album;
@@ -26,6 +27,20 @@ class ZamowienieController extends Controller
     public function index()
     {
         //
+    }
+
+    public function user()
+    {
+        $statusy = Status::all();
+        $userId = Auth::id();
+        $zamowiania = Zamowienie::where('klientId',$userId )->get();
+        //dd($statusy);
+        return view('UserZamowienie.index', compact('zamowiania', 'statusy'));
+    }
+
+    public function userDetails(Zamowienie $zamowienie)
+    {
+        return view('UserZamowienie.details', compact('amowienie'));
     }
 
     /**
@@ -94,7 +109,7 @@ class ZamowienieController extends Controller
 
 
         $request->session()->forget('cart');
-        return view ("home");
+        return route('userZamowienie.index');
 
 
     }

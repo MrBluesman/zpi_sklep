@@ -136,6 +136,16 @@ Route::group([
         'as' => 'zamowienie.store'
     ]);
 
+    Route::get('/UserZamowienia', [
+        'uses' => 'ZamowienieController@user',
+        'as' => 'userZamowienie.index'
+    ]);
+
+    Route::get('/UserZamowienia/{Zamowienie}', [
+        'uses' => 'ZamowienieController@userDetails',
+        'as' => 'userZamowienie.userDetails'
+    ]);
+
 });
 
 

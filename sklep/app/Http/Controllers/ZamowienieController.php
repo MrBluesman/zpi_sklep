@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PozycjeZamowienia;
 use Illuminate\Http\Request;
 use App\Cart;
 use App\Album;
@@ -46,12 +47,9 @@ class ZamowienieController extends Controller
     public function store(Request $request)
     {
 
-
         //dd($request->all());
 
         //Adres
-
-
         $adres = new Adres();
         $adres->miasto = $request->input('miasto');
         $adres->ulica = $request->input('ulica');
@@ -61,12 +59,8 @@ class ZamowienieController extends Controller
         $adres->save();
 
 
-
-
-
         $cart = Session::has('cart')?$request->session()->get('cart'):null;
-
-        //dd($cart->discountCode);
+        //dd($cart);
 
 
         //Zamowienie
@@ -88,8 +82,18 @@ class ZamowienieController extends Controller
         $zamowienie->save();
 
 
+        foreach ($cart->items as $poz){
+            //dd($poz['item']->plyta_id);
+            $pozyczam = new PozycjeZamowienia();
+            $pozyczam->plytaId = $poz['item']->plyta_id;
+            $pozyczam->ilosc =  $poz['qty'];
+            $pozyczam->czy_fizyczna = 1;
+            $pozyczam->zamowienieId = $zamowienie->zamowienie_id;
+            $pozyczam->save();
+        }
 
-        //$request->session()->forget('cart');
+
+        $request->session()->forget('cart');
         return view ("home");
 
 

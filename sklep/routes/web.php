@@ -141,7 +141,7 @@ Route::group([
         'as' => 'userZamowienie.index'
     ]);
 
-    Route::get('/UserZamowienia/{Zamowienie}', [
+    Route::get('/UserZamowienia/{zamowienie}', [
         'uses' => 'ZamowienieController@userDetails',
         'as' => 'userZamowienie.userDetails'
     ]);

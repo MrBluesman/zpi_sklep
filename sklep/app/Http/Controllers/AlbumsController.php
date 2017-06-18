@@ -40,7 +40,7 @@ class AlbumsController extends Controller
     public function edit(Album $album) {
         $artists = Artist::all();
         $types = Type::all();
-
+        dd($album);
        // $selectedartist = Artist::where('artysta_id', '=', 2);
         //return view('albums.addAlbum')->with('Artist', $items);
 

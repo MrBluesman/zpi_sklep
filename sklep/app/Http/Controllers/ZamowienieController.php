@@ -34,13 +34,20 @@ class ZamowienieController extends Controller
         $statusy = Status::all();
         $userId = Auth::id();
         $zamowiania = Zamowienie::where('klientId',$userId )->get();
-        //dd($statusy);
+        //dd($zamowiania);
         return view('UserZamowienie.index', compact('zamowiania', 'statusy'));
     }
 
     public function userDetails(Zamowienie $zamowienie)
     {
-        return view('UserZamowienie.details', compact('amowienie'));
+
+        //$zamowienie = Zamowienie::find($zamowienie);
+        $adres = Adres::where('adres_id', $zamowienie['adresId'])->get();
+        $pozycjezam = PozycjeZamowienia::where('zamowienieId',$zamowienie['zamowienie_id'])->get();
+        $statusy = Status::all();
+        //$adres =  $zamowienie->adres();
+        dd($pozycjezam);
+        return view('UserZamowienie.details', compact('zamowienie', 'adres', 'pozycjezam','statusy'));
     }
 
     /**

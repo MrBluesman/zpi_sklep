@@ -16,7 +16,7 @@
                 @foreach($zamowiania as $zamowienie)
                     <tr>
                         <td>
-                            <a href="{{ route('userZamowienie.userDetails' , $zamowienie) }}">{{ $zamowienie['zamowienie_id']}}</a>
+                            <a href="{{ route('userZamowienie.userDetails', $zamowienie) }}">{{ $zamowienie['zamowienie_id']}}</a>
                         </td>
                         <td><center>
                                 @php ($stat = $statusy[$zamowienie['statusId']-1])

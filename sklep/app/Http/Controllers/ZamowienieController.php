@@ -60,6 +60,45 @@ class ZamowienieController extends Controller
         return view('UserZamowienie.details', compact('zamowienie', 'adres', 'pozycjezam','statusy','plyta'));
     }
 
+    public function prac()
+    {
+        $statusy = Status::all();
+        //$userId = Auth::id();
+        $zamowiania = Zamowienie::all();
+        //dd($zamowiania);
+        return view('pracZamowienie.index', compact('zamowiania', 'statusy'));
+    }
+
+    public function pracDetails(Zamowienie $zamowienie)
+    {
+
+        //$zamowienie = Zamowienie::find($zamowienie);
+
+        //$adres = Adres::where('adres_id', $zamowienie['adresId'])->get();
+        $adres = $zamowienie->adres()->first();
+
+        $pozycjezam = PozycjeZamowienia::where('zamowienieId',$zamowienie['zamowienie_id'])->get();
+        //$pozycjezam = $zamowienie->pozycjeZamowienia()->get();
+
+        $plyta = [];
+        $statusy = Status::all();
+        foreach($pozycjezam as $zam){
+            array_push($plyta,Album::where('plyta_id',$zam['plytaId'])->first());
+        }
+        //$adres =  $zamowienie->adres();
+        //dd($zamowienie);
+        return view('PracZamowienie.details', compact('zamowienie', 'adres', 'pozycjezam','statusy','plyta'));
+    }
+
+    public function pracZmienStatus(Zamowienie $zamowienie, Request $request)
+    {
+        //dd($zamowienie);
+        //dd($request->all());
+        $zamowienie->statusId = $request->input('status');
+        $zamowienie->save();
+        return \redirect(route('pracZamowienie.pracDetails', $zamowienie));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Adres;
 
 
+
 class ZamowienieController extends Controller
 {
     /**
@@ -42,12 +43,21 @@ class ZamowienieController extends Controller
     {
 
         //$zamowienie = Zamowienie::find($zamowienie);
-        $adres = Adres::where('adres_id', $zamowienie['adresId'])->get();
+
+        //$adres = Adres::where('adres_id', $zamowienie['adresId'])->get();
+        $adres = $zamowienie->adres()->first();
+
         $pozycjezam = PozycjeZamowienia::where('zamowienieId',$zamowienie['zamowienie_id'])->get();
+        //$pozycjezam = $zamowienie->pozycjeZamowienia()->get();
+
+        $plyta = [];
         $statusy = Status::all();
+        foreach($pozycjezam as $zam){
+            array_push($plyta,Album::where('plyta_id',$zam['plytaId'])->first());
+        }
         //$adres =  $zamowienie->adres();
-        dd($pozycjezam);
-        return view('UserZamowienie.details', compact('zamowienie', 'adres', 'pozycjezam','statusy'));
+       // dd($adres);
+        return view('UserZamowienie.details', compact('zamowienie', 'adres', 'pozycjezam','statusy','plyta'));
     }
 
     /**

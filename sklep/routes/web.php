@@ -136,6 +136,16 @@ Route::group([
         'as' => 'zamowienie.store'
     ]);
 
+    Route::get('/UserZamowienia', [
+        'uses' => 'ZamowienieController@user',
+        'as' => 'userZamowienie.index'
+    ]);
+
+    Route::get('/UserZamowienia/{zamowienie}', [
+        'uses' => 'ZamowienieController@userDetails',
+        'as' => 'userZamowienie.userDetails'
+    ]);
+
 });
 
 
@@ -152,6 +162,24 @@ Route::group([
     {
         return view('home.homePrac');
     });
+
+    //Zamówienie
+
+    Route::get('/PracZamowienia', [
+        'uses' => 'ZamowienieController@prac',
+        'as' => 'pracZamowienie.index'
+    ]);
+
+    Route::get('/PracZamowienia/{zamowienie}', [
+        'uses' => 'ZamowienieController@pracDetails',
+        'as' => 'pracZamowienie.pracDetails'
+    ]);
+
+    Route::post('/PracZamowienia/zmienStatus/{zamowienie}', [
+        'uses' => 'ZamowienieController@pracZmienStatus',
+        'as' => 'pracZamowienie.pracZmienStatus'
+    ]);
+
 });
 
 //TREŚC TYLKO DLA ADMINISTRATORA - Routingi

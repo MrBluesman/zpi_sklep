@@ -11,5 +11,10 @@ class Adres extends Model
     protected $primaryKey = 'adres_id';
     public $timestamps = false;
 
+    public function zamowienie()
+    {
+        return $this->belongsTo('App\Zamowienie');
+    }
+
 
 }

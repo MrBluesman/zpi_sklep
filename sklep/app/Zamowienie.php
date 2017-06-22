@@ -3,10 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Zamowienie extends Model
 {
-    protected $fillable = ['cena','metoda_platnosci','data_zamowienia','znizka'];
+    protected $fillable = ['cena','metoda_platnosci','data_zamowienia','znizka',];
     protected $table = 'zamowienie';
     protected $primaryKey = 'zamowienie_id';
     public $timestamps = true;
@@ -28,7 +29,7 @@ class Zamowienie extends Model
 
     public function adres()
     {
-        return $this->hasMany('App\Adres');
+        return $this->hasOne('App\Adres','adres_id', 'adresId' );
     }
 
 }

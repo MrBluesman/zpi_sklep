@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\PozycjeZamowienia;
+use App\Status;
 use Illuminate\Http\Request;
 use App\Cart;
 use App\Album;
@@ -15,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Adres;
 
 
+
 class ZamowienieController extends Controller
 {
     /**
@@ -25,6 +28,75 @@ class ZamowienieController extends Controller
     public function index()
     {
         //
+    }
+
+    public function user()
+    {
+        $statusy = Status::all();
+        $userId = Auth::id();
+        $zamowiania = Zamowienie::where('klientId',$userId )->get();
+        //dd($zamowiania);
+        return view('UserZamowienie.index', compact('zamowiania', 'statusy'));
+    }
+
+    public function userDetails(Zamowienie $zamowienie)
+    {
+
+        //$zamowienie = Zamowienie::find($zamowienie);
+
+        //$adres = Adres::where('adres_id', $zamowienie['adresId'])->get();
+        $adres = $zamowienie->adres()->first();
+
+        $pozycjezam = PozycjeZamowienia::where('zamowienieId',$zamowienie['zamowienie_id'])->get();
+        //$pozycjezam = $zamowienie->pozycjeZamowienia()->get();
+
+        $plyta = [];
+        $statusy = Status::all();
+        foreach($pozycjezam as $zam){
+            array_push($plyta,Album::where('plyta_id',$zam['plytaId'])->first());
+        }
+        //$adres =  $zamowienie->adres();
+       // dd($adres);
+        return view('UserZamowienie.details', compact('zamowienie', 'adres', 'pozycjezam','statusy','plyta'));
+    }
+
+    public function prac()
+    {
+        $statusy = Status::all();
+        //$userId = Auth::id();
+        $zamowiania = Zamowienie::all();
+        //dd($zamowiania);
+        return view('pracZamowienie.index', compact('zamowiania', 'statusy'));
+    }
+
+    public function pracDetails(Zamowienie $zamowienie)
+    {
+
+        //$zamowienie = Zamowienie::find($zamowienie);
+
+        //$adres = Adres::where('adres_id', $zamowienie['adresId'])->get();
+        $adres = $zamowienie->adres()->first();
+
+        $pozycjezam = PozycjeZamowienia::where('zamowienieId',$zamowienie['zamowienie_id'])->get();
+        //$pozycjezam = $zamowienie->pozycjeZamowienia()->get();
+
+        $plyta = [];
+        $statusy = Status::all();
+        foreach($pozycjezam as $zam){
+            array_push($plyta,Album::where('plyta_id',$zam['plytaId'])->first());
+        }
+        //$adres =  $zamowienie->adres();
+        //dd($zamowienie);
+        return view('PracZamowienie.details', compact('zamowienie', 'adres', 'pozycjezam','statusy','plyta'));
+    }
+
+    public function pracZmienStatus(Zamowienie $zamowienie, Request $request)
+    {
+        //dd($zamowienie);
+        //dd($request->all());
+        $zamowienie->statusId = $request->input('status');
+        $zamowienie->save();
+        return \redirect(route('pracZamowienie.pracDetails', $zamowienie));
     }
 
     /**
@@ -46,12 +118,9 @@ class ZamowienieController extends Controller
     public function store(Request $request)
     {
 
-
         //dd($request->all());
 
         //Adres
-
-
         $adres = new Adres();
         $adres->miasto = $request->input('miasto');
         $adres->ulica = $request->input('ulica');
@@ -61,12 +130,8 @@ class ZamowienieController extends Controller
         $adres->save();
 
 
-
-
-
         $cart = Session::has('cart')?$request->session()->get('cart'):null;
-
-        //dd($cart->discountCode);
+        //dd($cart);
 
 
         //Zamowienie
@@ -88,9 +153,19 @@ class ZamowienieController extends Controller
         $zamowienie->save();
 
 
+        foreach ($cart->items as $poz){
+            //dd($poz['item']->plyta_id);
+            $pozyczam = new PozycjeZamowienia();
+            $pozyczam->plytaId = $poz['item']->plyta_id;
+            $pozyczam->ilosc =  $poz['qty'];
+            $pozyczam->czy_fizyczna = 1;
+            $pozyczam->zamowienieId = $zamowienie->zamowienie_id;
+            $pozyczam->save();
+        }
 
-        //$request->session()->forget('cart');
-        return view ("home");
+
+        $request->session()->forget('cart');
+        return route('userZamowienie.index');
 
 
     }

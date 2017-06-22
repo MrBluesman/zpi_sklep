@@ -15,8 +15,6 @@
     <a class="btn btn-primary" href="{{ route('userAlbums.index') }}">Albumy</a>
     {{--<a class="btn btn-primary" href="{{ route('discountCodes.index') }}">Kody rabatowe</a>--}}
     {{--<a class="btn btn-primary" href="{{ route('userManagementPanel.index') }}">Zarządzanie użytkownikami</a>--}}
-
-
 @endsection
 
 @section('scripts')
@@ -28,7 +26,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.1.1/typeahead.bundle.min.js"></script>
 
     <script>
-//        document.write("adasd");
+        //        document.write("adasd");
 
         jQuery(document).ready(function($) {
             // Set the Options for "Bloodhound" suggestion engine
@@ -67,7 +65,7 @@
                     suggestion: function (data) {
                         //data.osoba = undefined;
                         {{--{{ $data = data; }}--}}
-                        {{--{{route('userArtists.details', $data)}}--}}
+                                {{--{{route('userArtists.details', $data)}}--}}
                         if(data.klasa == 'artysta')
                             return '<a href="userArtists/' + data.id  + '" class="list-group-item">' + data.nazwa + ' -<b> ' + data.klasa +  '</b> </a>'
                         else
